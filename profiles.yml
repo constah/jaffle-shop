@@ -1,0 +1,24 @@
+infolab:
+  outputs:
+    dev:
+      dbname: prod
+      host: localhost
+      pass: Lebeast123!
+      port: 5432
+      schema: core
+      threads: 2
+      type: postgres
+      user: postgres
+  target: dev
+jaffle_shop:
+  outputs:
+    dev:
+      dbname: prod
+      host: localhost
+      pass: Lebeast123!
+      port: 5432
+      schema: core
+      threads: 2
+      type: postgres
+      user: postgres
+  target: dev
