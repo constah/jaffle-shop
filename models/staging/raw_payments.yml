@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: staging
+    description: This is the landing area for all data extracted from source systems before transformations are done.
+    database: prod
+    schema: staging
+    tables:
+      - name: raw_payments
+        description: |
+          | Field | Description |
+          |-------|-------------|
+          | **Model Name** | `raw_payments` |
+          | **Model Schema** | `staging` |
+          | **Business Description** | Raw transactional data capturing payment information for customer orders, including method and amount paid. |
+          | **Grain of the Model** | One row per payment transaction |
+          | **Usage Context** | Used for modeling payment behavior, revenue tracking, and payment method analytics. |
+          | **Load Frequency** | Daily or near real-time (based on transaction feed) |
+        columns:
+          - name: id
+            description: Unique identifier for each payment transaction.
+            data_tests:
+              - not_null
+              - unique
+
+          - name: order_id
+            description: Foreign key referencing the associated order.
+            data_tests:
+              - not_null
+
+          - name: payment_method
+            description: Method used for payment (e.g., credit_card, coupon, bank_transfer, gift_card).
+            data_tests:
+              - not_null
+
+          - name: amount
+            description: Monetary amount of the payment transaction.
+            tests:
+              - not_null

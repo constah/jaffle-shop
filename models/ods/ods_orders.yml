@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: ods_orders
+    description: |
+      | Field | Description |
+      |-------|-------------|
+      | **Model Name** | `ods_orders` |
+      | **Model Schema** | `ods` |
+      | **Business Description** | Cleaned and standardized ODS model containing order details including order dates, customer linkage, and status. |
+      | **Grain of the Model** | One row per order |
+      | **Usage Context** | Used to power order-level analytics, including sales performance and order status tracking. |
+      | **Load Frequency** | Daily dbt run |
+    columns:
+      - name: order_id
+        description: Unique identifier for each order, renamed from `id` in the source.
+        tests:
+          - not_null
+
+          - unique
+
+      - name: customer_id
+        description: Foreign key linking the order to the customer who placed it.
+        tests:
+          - not_null
+
+      - name: order_date
+        description: Date on which the order was placed (cast to date format).
+        tests:
+          - not_null
+
+      - name: status
+        description: Status of the order, such as `completed` or `returned`.
+        tests:
+          - not_null

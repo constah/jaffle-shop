@@ -1,0 +1,34 @@
+version: 2
+
+sources:
+  - name: staging
+    description: This is the landing area for all data extracted from source systems before transformations are done.
+    database: prod
+    schema: staging
+    tables:
+      - name: raw_customers
+        description: |
+          | Field | Description |
+          |-------|-------------|
+          | **Model Name** | `raw_customers` |
+          | **Model Schema** | `staging` |
+          | **Business Description** | Raw extract of customer information containing basic identity attributes such as ID, first name, and last name initial. |
+          | **Grain of the Model** | One row per customer |
+          | **Usage Context** | Serves as the raw source for customer dimension modeling and identity resolution processes. |
+          | **Load Frequency** | Daily or near real-time (based on upstream system sync) |
+        columns:
+          - name: id
+            description: Unique identifier for each customer.
+            data_tests:
+              - not_null
+              - unique
+
+          - name: first_name
+            description: Customer's first name.
+            data_tests:
+              - not_null
+
+          - name: last_name
+            description: First initial of the customer's last name.
+            data_tests:
+              - not_null

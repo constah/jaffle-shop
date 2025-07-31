@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: ods_customer
+    description: |
+      | Field | Description |
+      |-------|-------------|
+      | **Model Name** | `ods_customer` |
+      | **Model Schema** | `ods` |
+      | **Business Description** | Cleaned operational data store (ODS) model for customer entities, derived from the raw customer source. It standardizes the customer fields and renames the identifier. |
+      | **Grain of the Model** | One row per customer |
+      | **Usage Context** | Used as a standardized customer dimension input for downstream analytics and customer modeling. |
+      | **Load Frequency** | Daily dbt run |
+    columns:
+      - name: customer_id
+        description: Unique identifier for each customer, renamed from `id` in the source.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: first_name
+        description: Customer's first name.
+        data_tests:
+          - not_null
+
+      - name: last_name
+        description: First initial of the customer's last name.
+        data_tests:
+          - not_null

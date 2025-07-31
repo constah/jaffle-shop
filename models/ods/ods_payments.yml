@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: ods_payments
+    description: |
+      | Field | Description |
+      |-------|-------------|
+      | **Model Name** | `ods_payments` |
+      | **Model Schema** | `ods` |
+      | **Business Description** | Cleaned and standardized ODS model for payment transactions, directly sourced from raw payment data. |
+      | **Grain of the Model** | One row per payment transaction |
+      | **Usage Context** | Used to analyze payment behavior, revenue by method, and transaction-level reporting. |
+      | **Load Frequency** | Daily dbt run |
+    columns:
+      - name: id
+        description: Unique identifier for each payment transaction.
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: Identifier of the order to which the payment relates.
+        tests:
+          - not_null
+
+      - name: payment_method
+        description: Type of payment used (e.g., credit_card, coupon, bank_transfer, gift_card).
+        tests:
+          - not_null
+
+      - name: amount
+        description: Payment amount for the transaction.
+        tests:
+          - not_null
