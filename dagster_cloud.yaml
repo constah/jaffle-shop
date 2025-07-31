@@ -1,0 +1,6 @@
+locations:
+- build:
+    directory: ./jaffle_shop
+  code_source:
+    module_name: jaffle_shop.definitions
+  location_name: jaffle_shop
